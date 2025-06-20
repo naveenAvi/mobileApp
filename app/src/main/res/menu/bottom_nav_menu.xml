@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_academic"
+        android:title="Acedemic"
+        android:icon="@drawable/home" />
+
+    <item
+        android:id="@+id/nav_events"
+        android:title="Events"
+        android:icon="@drawable/categories" />
+
+    <item
+        android:id="@+id/nav_sports"
+        android:title="Sports"
+        android:icon="@drawable/profile" />
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_sports" />
+
+</menu>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_color">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="My Profile"
+        android:gravity="center"
+        app:titleTextColor="#004643" />
+
+    <!-- Main Content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
+
+            <!-- Profile Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <!-- Avatar -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:layout_marginTop="24dp"
+                        app:cardCornerRadius="60dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            android:id="@+id/iv_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_user_avatar"
+                            android:contentDescription="User Avatar" />
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Camera Icon -->
+                    <ImageView
+                        android:id="@+id/iv_camera_icon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginTop="-36dp"
+                        android:layout_marginEnd="-80dp"
+                        android:background="@drawable/circle_background"
+                        android:padding="8dp"
+                        android:tint="@android:color/white" />
+
+                    <!-- Name Banner -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#29004643"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Naveen Avishka"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="2020t00859"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Info Fields -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Full Name"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/et_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_grey_box"
+                android:padding="12dp"
+                android:text="Naveen Avishka"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_grey_box"
+                android:padding="12dp"
+                android:text="2020t00859@stu.cmb.ac.lk"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile Number"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/et_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_grey_box"
+                android:padding="12dp"
+                android:text="076 3853638"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date Of Birth"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:layout_marginTop="12dp" />
+
+            <EditText
+                android:id="@+id/et_dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_grey_box"
+                android:padding="12dp"
+                android:text="01 / 04 / 199X"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_update_info"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Update User Information"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins"
+                android:background="@drawable/button_primary"
+                android:elevation="2dp"
+                android:layout_marginTop="30px"
+                android:stateListAnimator="@null"
+                style="?android:attr/borderlessButtonStyle" />
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

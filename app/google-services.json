@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "292934331112",
+    "project_id": "tnews-aae0b",
+    "storage_bucket": "tnews-aae0b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292934331112:android:c4905209272b83c0aa375d",
+        "android_client_info": {
+          "package_name": "com.example.tnews"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwlkuLd8t5lF1UyPLvOTAl8SnAu6XPMkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#2196F3"
+        android:elevation="4dp"
+
+        app:navigationIconTint="@android:color/white"
+        app:titleTextColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- News Image -->
+            <ImageView
+                android:id="@+id/news_detail_image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:contentDescription="News Image"
+                android:background="#F0F0F0" />
+
+            <!-- Content Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="#FDF0F6">
+
+                <!-- News Title -->
+                <TextView
+                    android:id="@+id/news_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="News Title"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- News Date -->
+                <TextView
+                    android:id="@+id/news_detail_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Date"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:fontFamily="@font/poppins"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- News Content -->
+                <TextView
+                    android:id="@+id/news_detail_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="News Content"
+                    android:textSize="16sp"
+                    android:textColor="#800080"
+                    android:lineSpacingExtra="6dp"
+                    android:fontFamily="@font/poppins"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Another Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E0E0"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- News Description -->
+                <TextView
+                    android:id="@+id/news_detail_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="News Description"
+                    android:textSize="14sp"
+                    android:textColor="#333333"
+                    android:lineSpacingExtra="4dp"
+                    android:fontFamily="@font/poppins"
+                    android:layout_marginBottom="32dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
