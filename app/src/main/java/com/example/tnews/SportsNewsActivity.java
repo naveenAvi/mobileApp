@@ -2,9 +2,16 @@ package com.example.tnews;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -128,7 +135,6 @@ public class SportsNewsActivity extends BaseActivity {
     }
 
     private void createNewsCard(News news) {
-        // Create CardView programmatically
         CardView cardView = new CardView(this);
         LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -137,23 +143,25 @@ public class SportsNewsActivity extends BaseActivity {
         cardParams.setMargins(0, 0, 0, dpToPx(20));
         cardView.setLayoutParams(cardParams);
         cardView.setCardElevation(dpToPx(4));
-        cardView.setRadius(dpToPx(20));
-        cardView.setCardBackgroundColor(Color.parseColor("#D9D9D9"));
+        cardView.setRadius(dpToPx(12)); // Rounded corners
+        cardView.setCardBackgroundColor(Color.parseColor("#F9F9F9")); // Light gray background
 
-        // Create main LinearLayout for card content
+        // Create the main LinearLayout for the card (horizontal orientation)
         LinearLayout mainLayout = new LinearLayout(this);
         mainLayout.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        mainLayout.setOrientation(LinearLayout.VERTICAL);
+        mainLayout.setOrientation(LinearLayout.HORIZONTAL);  // Horizontal layout for image and content
+        mainLayout.setPadding(dpToPx(6), dpToPx(6), dpToPx(6), dpToPx(6)); // Padding around content
 
-        // Create ImageView
+        // Create ImageView (Image will be on the left)
         ImageView imageView = new ImageView(this);
         LinearLayout.LayoutParams imageParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                dpToPx(200)
+                dpToPx(120), // Fixed width for the image
+                dpToPx(120)  // Fixed height for the image
         );
+        imageParams.setMargins(0, 0, dpToPx(12), 0); // Margin to the right of the image
         imageView.setLayoutParams(imageParams);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
@@ -163,28 +171,50 @@ public class SportsNewsActivity extends BaseActivity {
                     .load(news.getImageUrl())
                     .placeholder(R.drawable.ic_launcher_foreground)
                     .error(R.drawable.ic_launcher_foreground)
+                    .transform(new com.squareup.picasso.Transformation() {
+                        @Override
+                        public Bitmap transform(Bitmap source) {
+                            Bitmap output = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);
+                            Canvas canvas = new Canvas(output);
+                            Paint paint = new Paint();
+                            paint.setAntiAlias(true);
+                            paint.setShader(new BitmapShader(source, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP));
+                            canvas.drawCircle(source.getWidth() / 2, source.getHeight() / 2, source.getWidth() / 2, paint);
+                            if (output != source) {
+                                source.recycle();
+                            }
+                            return output;
+                        }
+
+                        @Override
+                        public String key() {
+                            return "circle";
+                        }
+                    })
                     .into(imageView);
         } else {
-            imageView.setImageResource(R.drawable.ic_launcher_foreground);
+            imageView.setImageResource(R.drawable.ic_launcher_foreground); // Default image
         }
 
-        // Create content LinearLayout
+        // Create a vertical LinearLayout for content (title, description, etc.)
         LinearLayout contentLayout = new LinearLayout(this);
         LinearLayout.LayoutParams contentParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
+                0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f); // 1f weight to take remaining space
         contentLayout.setLayoutParams(contentParams);
         contentLayout.setOrientation(LinearLayout.VERTICAL);
-        contentLayout.setPadding(dpToPx(20), dpToPx(20), dpToPx(20), dpToPx(20));
-        cardView.setCardBackgroundColor(Color.parseColor("#D9D9D9"));
-        cardView.setRadius(dpToPx(20));
+        contentLayout.setGravity(Gravity.START); // Align text to the start (left)
 
-        // Create TextViews
-        TextView titleTextView = createTextView(news.getTitle(), 16, true, 0xFF000000);
-        TextView contentTextView = createTextView(news.getContent(), 14, false, 0xFF800080);
-        TextView dateTextView = createTextView(news.getDate(), 12, false, 0xFF666666);
-        TextView descriptionTextView = createTextView(news.getDescription(), 14, false, 0xFF333333);
+        // Create TextViews for title, content, description
+        TextView titleTextView = createTextView(news.getTitle(), 18, true, 0xFF000000); // Bold, larger title
+        TextView contentTextView = createTextView(news.getContent(), 14, false, 0xFF888888); // Smaller description
+
+        // Truncate the description to show only 1-2 lines
+        TextView descriptionTextView = new TextView(this);
+        descriptionTextView.setText(news.getDescription());
+        descriptionTextView.setTextSize(14);
+        descriptionTextView.setTextColor(0xFF333333);
+        descriptionTextView.setMaxLines(2); // Show only 1-2 lines
+        descriptionTextView.setEllipsize(TextUtils.TruncateAt.END); // Truncate the rest of the text with ellipsis (...)
 
         // Create Read News button
         Button readButton = new Button(this);
@@ -192,13 +222,12 @@ public class SportsNewsActivity extends BaseActivity {
                 LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
-        buttonParams.setMargins(0, dpToPx(12), 0, 0);
+        buttonParams.setMargins(0, dpToPx(5), 0, 0);
         readButton.setLayoutParams(buttonParams);
         readButton.setText("Read More");
         readButton.setBackgroundColor(Color.TRANSPARENT);
         readButton.setTextColor(Color.parseColor("#004643"));
 
-        // Add click listener for the button
         // UPDATED: Add click listener for the button to open NewsDetailActivity
         readButton.setOnClickListener(v -> {
             // Create intent to open NewsDetailActivity
@@ -215,24 +244,23 @@ public class SportsNewsActivity extends BaseActivity {
             startActivity(intent);
         });
 
-
-        // Add views to content layout
+        // Add views to the content layout
         contentLayout.addView(titleTextView);
         contentLayout.addView(contentTextView);
-        contentLayout.addView(dateTextView);
         contentLayout.addView(descriptionTextView);
         contentLayout.addView(readButton);
 
-        // Add views to main layout
+        // Add ImageView and content layout to the main layout (horizontal)
         mainLayout.addView(imageView);
         mainLayout.addView(contentLayout);
 
-        // Add main layout to card
+        // Add the main layout to the card
         cardView.addView(mainLayout);
 
-        // Add card to news container
+        // Add the card to the news container (assumed to be a LinearLayout)
         newsContainer.addView(cardView);
     }
+
 
     private TextView createTextView(String text, int textSize, boolean bold, int color) {
         TextView textView = new TextView(this);
